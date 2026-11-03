@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BLEND TRAVEL — Marraquexe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --creme: #f4f1e8;
+      --creme-escuro: #e7ddcc;
+      --azul: #164c51;
+      --azul-claro: #2d696b;
+      --terracota: #a8472e;
+      --terracota-clara: #c8755d;
+      --areia: #d1a38b;
+      --castanho: #55352c;
+      --branco: #ffffff;
+      --sombra: 0 20px 60px rgba(22, 76, 81, 0.14);
+      --sombra-forte: 0 28px 75px rgba(31, 28, 22, 0.25);
+      --raio: 22px;
+      --transicao: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--creme);
+      color: var(--azul);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Navegação */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244, 241, 232, 0.92);
+      border-bottom: 1px solid rgba(22, 76, 81, 0.13);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-container {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      color: var(--azul);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 18px;
+      background: transparent;
+      color: var(--azul);
+      font-weight: 700;
+      transition: var(--transicao);
+    }
+
+    .nav-button:hover,
+    .nav-button.active {
+      background: var(--azul);
+      color: var(--creme);
+      transform: translateY(-2px);
+    }
+
+    /* Páginas */
+
+    .page {
+      display: none;
+      animation: aparecerPagina 0.55s ease both;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes aparecerPagina {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Elementos decorativos */
+
+    .shape {
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      opacity: 0.5;
+      pointer-events: none;
+      animation: flutuar 8s ease-in-out infinite;
+    }
+
+    .shape-one {
+      top: 150px;
+      left: -110px;
+      width: 230px;
+      height: 230px;
+      background: var(--terracota-clara);
+    }
+
+    .shape-two {
+      top: 480px;
+      right: -90px;
+      width: 220px;
+      height: 220px;
+      background: var(--areia);
+      animation-delay: -3s;
+    }
+
+    @keyframes flutuar {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-25px) rotate(10deg);
+      }
+    }
+
+    /* Elementos gerais */
+
+    .section {
+      position: relative;
+      padding: 110px 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 20px;
+      color: var(--terracota);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.21em;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Botões */
+
+    .button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      border: 1px solid var(--azul);
+      border-radius: 999px;
+      font-weight: 700;
+      transition: var(--transicao);
+    }
+
+    .button-primary {
+      background: var(--azul);
+      color: var(--creme);
+    }
+
+    .button-primary:hover {
+      background: var(--terracota);
+      border-color: var(--terracota);
+      box-shadow: 0 12px 28px rgba(168, 71, 46, 0.28);
+      transform: translateY(-5px);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--azul);
+    }
+
+    .button-secondary:hover {
+      background: var(--azul);
+      color: var(--creme);
+      transform: translateY(-5px);
+    }
+
+    /* Promoção */
+
+    .promotion-intro {
+      position: relative;
+      min-height: 760px;
+      padding: 100px 0 130px;
+      overflow: hidden;
+    }
+
+    .promotion-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 0.75fr;
+      align-items: center;
+      gap: 90px;
+    }
+
+    .promotion-copy {
+      text-align: left;
+    }
+
+    .promotion-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+      color: var(--azul);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .promotion-label::before {
+      width: 42px;
+      height: 1px;
+      background: var(--terracota);
+      content: "";
+    }
+
+    .promotion-copy h1 {
+      max-width: 700px;
+      margin-bottom: 28px;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(4rem, 8vw, 8.2rem);
+      line-height: 0.88;
+      letter-spacing: -0.07em;
+    }
+
+    .promotion-copy h1 span {
+      display: block;
+      color: var(--terracota);
+    }
+
+    .promotion-copy > p {
+      max-width: 590px;
+      margin-bottom: 32px;
+      color: var(--castanho);
+      font-size: 1.1rem;
+    }
+
+    .promotion-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .mini-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .mini-fact {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mini-fact strong {
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: 1.7rem;
+    }
+
+    .mini-fact span {
+      color: var(--castanho);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Cartaz */
+
+    .poster-stage {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    .poster-shadow {
+      position: absolute;
+      bottom: -35px;
+      width: 75%;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(59, 40, 31, 0.28);
+      filter: blur(18px);
+      animation: sombraPoster 5s ease-in-out infinite;
+    }
+
+    @keyframes sombraPoster {
+      0%,
+      100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 0.25;
+      }
+    }
+
+    .poster {
+      position: relative;
+      width: min(100%, 460px);
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--creme-escuro);
+      box-shadow: var(--sombra-forte);
+      transform: rotate(2deg);
+      transition: var(--transicao);
+      animation: entradaPoster 1s 0.15s both;
+    }
+
+    .poster img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .poster:hover {
+      transform: rotate(0deg) translateY(-12px) scale(1.015);
+    }
+
+    @keyframes entradaPoster {
+      from {
+        opacity: 0;
+        transform: translateY(55px) rotate(8deg) scale(0.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) rotate(2deg) scale(1);
+      }
+    }
+
+    /* Manifesto */
+
+    .manifesto {
+      background: var(--azul);
+      color: var(--creme);
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .manifesto h2 {
+      max-width: 560px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      line-height: 0.96;
+    }
+
+    .manifesto h2 span {
+      color: var(--terracota-clara);
+    }
+
+    .manifesto-copy p {
+      max-width: 650px;
+      color: rgba(244, 241, 232, 0.84);
+      font-size: 1.08rem;
+    }
+
+    .manifesto-copy p + p {
+      margin-top: 20px;
+    }
+
+    /* Cards da promoção */
+
+    .section-heading {
+      max-width: 750px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 18px;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.95;
+    }
+
+    .section-heading p {
+      max-width: 680px;
+      color: var(--castanho);
+      font-size: 1.06rem;
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .experience-card {
+      position: relative;
+      min-height: 280px;
+      padding: 30px;
+      overflow: hidden;
+      border-radius: var(--raio);
+      background: var(--creme-escuro);
+      box-shadow: var(--sombra);
+      transition: var(--transicao);
+    }
+
+    .experience-card:hover {
+      box-shadow: 0 28px 55px rgba(22, 76, 81, 0.2);
+      transform: translateY(-11px) rotate(-1deg);
+    }
+
+    .experience-card:nth-child(2) {
+      background: var(--terracota);
+      color: var(--creme);
+    }
+
+    .experience-card:nth-child(3) {
+      background: var(--azul-claro);
+      color: var(--creme);
+    }
+
+    .experience-number {
+      display: block;
+      margin-bottom: 42px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.17em;
+      opacity: 0.75;
+    }
+
+    .experience-card h3 {
+      max-width: 280px;
+      margin-bottom: 13px;
+      font-family: "Playfair Display", serif;
+      font-size: 1.85rem;
+      line-height: 1;
+    }
+
+    .experience-card p {
+      max-width: 285px;
+      font-size: 0.96rem;
+      opacity: 0.86;
+    }
+
+    /* Chamada final */
+
+    .campaign-call {
+      display: grid;
+      grid-template-columns: 1fr 0.65fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .campaign-call h2 {
+      max-width: 720px;
+      margin-bottom: 23px;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 0.94;
+    }
+
+    .campaign-call h2 span {
+      color: var(--terracota);
+    }
+
+    .campaign-call > div > p {
+      max-width: 630px;
+      color: var(--castanho);
+      font-size: 1.08rem;
+    }
+
+    .call-box {
+      padding: 34px;
+      border-radius: var(--raio);
+      background: var(--terracota);
+      color: var(--creme);
+      box-shadow: var(--sombra);
+      transform: rotate(-2deg);
+      transition: var(--transicao);
+    }
+
+    .call-box:hover {
+      transform: rotate(0deg) translateY(-8px);
+    }
+
+    .call-box strong {
+      display: block;
+      margin-bottom: 15px;
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      line-height: 1;
+    }
+
+    .call-box p {
+      color: rgba(244, 241, 232, 0.85);
+      font-size: 0.96rem;
+    }
+
+    /* Portfólio */
+
+    .portfolio-intro {
+      padding: 120px 0 70px;
+      text-align: center;
+    }
+
+    .portfolio-intro h1 {
+      max-width: 900px;
+      margin: 0 auto 25px;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3.3rem, 7vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+    }
+
+    .portfolio-intro h1 span {
+      color: var(--terracota);
+    }
+
+    .portfolio-intro > p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--castanho);
+      font-size: 1.08rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .portfolio-card {
+      overflow: hidden;
+      border-radius: var(--raio);
+      background: var(--branco);
+      box-shadow: var(--sombra);
+      transition: var(--transicao);
+    }
+
+    .portfolio-card:hover {
+      box-shadow: 0 28px 60px rgba(22, 76, 81, 0.2);
+      transform: translateY(-10px);
+    }
+
+    .portfolio-image {
+      height: 310px;
+      overflow: hidden;
+      background: var(--creme-escuro);
+    }
+
+    .portfolio-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .portfolio-card:hover .portfolio-image img {
+      transform: scale(1.08);
+    }
+
+    .poster-image img {
+      padding: 12px;
+      object-fit: contain;
+    }
+
+    .portfolio-content {
+      padding: 30px;
+    }
+
+    .portfolio-content h3 {
+      margin-bottom: 12px;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      line-height: 1;
+    }
+
+    .portfolio-content p {
+      color: var(--castanho);
+    }
+
+    /* Texto de apresentação */
+
+    .travel-info {
+      margin-top: 90px;
+    }
+
+    .travel-intro {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 70px;
+      align-items: start;
+      margin-bottom: 55px;
+    }
+
+    .travel-intro h2 {
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.95;
+    }
+
+    .travel-intro p {
+      color: var(--castanho);
+      font-size: 1.06rem;
+    }
+
+    .travel-intro strong {
+      color: var(--terracota);
+    }
+
+    .info-section {
+      margin-top: 55px;
+    }
+
+    .info-section h2 {
+      margin-bottom: 25px;
+      color: var(--azul);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1;
+    }
+
+    .info-section > p {
+      max-width: 920px;
+      margin-bottom: 25px;
+      color: var(--castanho);
+      font-size: 1.04rem;
+    }
+
+    .advantages-grid,
+    .disadvantages-grid,
+    .places-grid,
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 26px;
+      border: 1px solid rgba(22, 76, 81, 0.12);
+      border-radius: var(--raio);
+      background: rgba(231, 221, 204, 0.7);
+      transition: var(--transicao);
+    }
+
+    .info-card:hover {
+      background: var(--azul);
+      color: var(--creme);
+      transform: translateY(-8px);
+    }
+
+    .info-card h3 {
+      margin-bottom: 10px;
+      color: var(--terracota);
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .info-card p {
+      color: var(--castanho);
+      font-size: 0.94rem;
+    }
+
+    .info-card:hover h3 {
+      color: var(--terracota-clara);
+    }
+
+    .info-card:hover p {
+      color: var(--creme);
+    }
+
+    .numbered-place {
+      position: relative;
+      padding-top: 48px;
+    }
+
+    .numbered-place::before {
+      position: absolute;
+      top: 22px;
+      left: 26px;
+      color: var(--terracota);
+      content: attr(data-number);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .food-card {
+      background: var(--terracota);
+    }
+
+    .food-card h3,
+    .food-card p {
+      color: var(--creme);
+    }
+
+    /* Conclusão */
+
+    .conclusion {
+      position: relative;
+      margin-top: 80px;
+      padding: 60px;
+      overflow: hidden;
+      border-radius: var(--raio);
+      background: var(--azul);
+      color: var(--creme);
+    }
+
+    .conclusion::after {
+      position: absolute;
+      right: -80px;
+      bottom: -100px;
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(244, 241, 232, 0.3);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .conclusion h2 {
+      position: relative;
+      z-index: 1;
+      max-width: 750px;
+      margin-bottom: 22px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      line-height: 0.95;
+    }
+
+    .conclusion p {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      color: rgba(244, 241, 232, 0.84);
+      font-size: 1.05rem;
+    }
+
+    /* Briefing */
+
+    .briefing {
+      margin-top: 90px;
+      padding: 60px;
+      border-radius: var(--raio);
+      background: var(--terracota);
+      color: var(--creme);
+    }
+
+    .briefing h2 {
+      margin-bottom: 38px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.7rem, 5vw, 4.8rem);
+      line-height: 0.95;
+    }
+
+    .briefing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .briefing-item {
+      padding-top: 18px;
+      border-top: 1px solid rgba(244, 241, 232, 0.45);
+    }
+
+    .briefing-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--creme-escuro);
+    }
+
+    .briefing-item p {
+      color: rgba(244, 241, 232, 0.86);
+    }
+
+    /* Rodapé */
+
+    footer {
+      margin-top: 90px;
+      padding: 42px 0;
+      background: var(--castanho);
+      color: var(--creme);
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-content strong {
+      letter-spacing: 0.12em;
+    }
+
+    .footer-content p {
+      color: rgba(244, 241, 232, 0.75);
+      font-size: 0.9rem;
+    }
+
+    /* Responsividade */
+
+    @media (max-width: 1000px) {
+      .promotion-layout,
+      .manifesto-grid,
+      .campaign-call,
+      .travel-intro {
+        grid-template-columns: 1fr;
+      }
+
+      .promotion-copy {
+        text-align: center;
+      }
+
+      .promotion-label {
+        justify-content: center;
+      }
+
+      .promotion-copy > p {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .promotion-actions,
+      .mini-facts {
+        justify-content: center;
+      }
+
+      .poster-stage {
+        margin-top: 25px;
+      }
+
+      .advantages-grid,
+      .disadvantages-grid,
+      .places-grid,
+      .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-container {
+        min-height: 70px;
+      }
+
+      .logo {
+        font-size: 0.82rem;
+      }
+
+      .nav-links {
+        gap: 3px;
+      }
+
+      .nav-button {
+        padding: 9px 10px;
+        font-size: 0.8rem;
+      }
+
+      .promotion-intro {
+        min-height: auto;
+        padding: 75px 0 100px;
+      }
+
+      .promotion-copy h1 {
+        font-size: clamp(3.6rem, 17vw, 6rem);
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .experience-grid,
+      .portfolio-grid,
+      .advantages-grid,
+      .disadvantages-grid,
+      .places-grid,
+      .food-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-intro {
+        padding-top: 80px;
+      }
+
+      .portfolio-intro h1 {
+        font-size: clamp(3.3rem, 15vw, 6rem);
+      }
+
+      .briefing,
+      .conclusion {
+        padding: 35px 25px;
+      }
+
+      .briefing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="container nav-container">
+
+      <a
+        href="#"
+        class="logo"
+        onclick="mostrarPagina('promocao'); return false;"
+      >
+        BLEND TRAVEL
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+
+        <button
+          class="nav-button active"
+          data-page="promocao"
+          onclick="mostrarPagina('promocao')"
+        >
+          Promoção
+        </button>
+
+        <button
+          class="nav-button"
+          data-page="portfolio"
+          onclick="mostrarPagina('portfolio')"
+        >
+          Portfólio
+        </button>
+
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ABA PROMOÇÃO -->
+
+    <section id="promocao" class="page active">
+
+      <div class="promotion-intro">
+
+        <div class="shape shape-one"></div>
+        <div class="shape shape-two"></div>
+
+        <div class="container">
+          <div class="promotion-layout">
+
+            <div class="promotion-copy">
+
+              <div class="promotion-label">
+                Uma viagem para sentir
+              </div>
+
+              <h1>
+                O prazer do
+                <span>inesperado.</span>
+              </h1>
+
+              <p>
+                Sai da rotina e aproxima-te de Marraquexe através das suas
+                cores, sabores, texturas, histórias e formas diferentes de
+                viver o quotidiano.
+              </p>
+
+              <div class="promotion-actions">
+
+                <button
+                  class="button button-primary"
+                  onclick="mostrarPagina('portfolio')"
+                >
+                  Explorar o projeto
+                </button>
+
+                <a
+                  href="#manifesto"
+                  class="button button-secondary"
+                >
+                  Conhecer a campanha
+                </a>
+
+              </div>
+
+              <div class="mini-facts">
+
+                <div class="mini-fact">
+                  <strong>01</strong>
+                  <span>Descoberta</span>
+                </div>
+
+                <div class="mini-fact">
+                  <strong>02</strong>
+                  <span>Encontro</span>
+                </div>
+
+                <div class="mini-fact">
+                  <strong>03</strong>
+                  <span>Experiência</span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="poster-stage">
+
+              <div class="poster-shadow"></div>
+
+              <article class="poster">
+
+                <img
+                  src="retire-o-quadrado-branco-dessa-imagem.jpg"
+                  alt="Cartaz da campanha BLEND TRAVEL sobre Marraquexe"
+                >
+
+              </article>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <section id="manifesto" class="section manifesto">
+
+        <div class="container">
+          <div class="manifesto-grid reveal">
+
+            <div>
+              <p class="eyebrow">A ideia central</p>
+
+              <h2>
+                Viajar também é
+                <span>aprender a olhar.</span>
+              </h2>
+            </div>
+
+            <div class="manifesto-copy">
+
+              <p>
+                Marraquexe apresenta uma realidade cultural diferente, capaz de
+                despertar curiosidade e, ao mesmo tempo, alguma hesitação.
+              </p>
+
+              <p>
+                A campanha transforma essa hesitação numa oportunidade de
+                descoberta, convidando os jovens a observar, sentir e conhecer
+                o destino com respeito pela sua identidade local.
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <section class="section">
+
+        <div class="container">
+
+          <div class="section-heading reveal">
+            <p class="eyebrow">Uma cidade para sentir</p>
+
+            <h2>
+              Descobre mais do que um destino.
+            </h2>
+
+            <p>
+              Marraquexe convida-te a sair do conhecido e a encontrar novas
+              referências através de experiências sensoriais, culturais e
+              humanas.
+            </p>
+          </div>
+
+          <div class="experience-grid">
+
+            <article class="experience-card reveal">
+              <span class="experience-number">01 · CORES</span>
+
+              <h3>
+                Texturas que ficam na memória.
+              </h3>
+
+              <p>
+                Paredes, tecidos, cerâmicas, portas e detalhes artesanais criam
+                uma paisagem visual única.
+              </p>
+            </article>
+
+            <article class="experience-card reveal">
+              <span class="experience-number">02 · SABORES</span>
+
+              <h3>
+                Uma viagem para todos os sentidos.
+              </h3>
+
+              <p>
+                Aromas, ingredientes e especiarias contam histórias através da
+                gastronomia marroquina.
+              </p>
+            </article>
+
+            <article class="experience-card reveal">
+              <span class="experience-number">03 · ENCONTROS</span>
+
+              <h3>
+                O inesperado acontece no caminho.
+              </h3>
+
+              <p>
+                Caminhar, observar e conhecer outras formas de viver pode
+                transformar a maneira como vemos o mundo.
+              </p>
+            </article>
+
+          </div>
+        </div>
+
+      </section>
+
+      <section class="section">
+
+        <div class="container">
+          <div class="campaign-call reveal">
+
+            <div>
+              <p class="eyebrow">BLEND TRAVEL</p>
+
+              <h2>
+                Sai do conhecido.
+                <span>Descobre o inesperado.</span>
+              </h2>
+
+              <p>
+                Uma campanha pensada para despertar a vontade de descobrir
+                Marraquexe sem recorrer a estereótipos, exotização ou
+                simplificações culturais.
+              </p>
+            </div>
+
+            <div class="call-box">
+
+              <strong>
+                O teu próximo destino pode começar aqui.
+              </strong>
+
+              <p>
+                Explora o portfólio para conhecer o briefing, o conceito
+                criativo, a identidade visual e os conteúdos da campanha.
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+    </section>
+
+    <!-- ABA PORTFÓLIO -->
+
+    <section id="portfolio" class="page">
+
+      <div class="container">
+
+        <div class="portfolio-intro">
+
+          <p class="eyebrow">
+            Apresentação do projeto
+          </p>
+
+          <h1>
+            Marraquexe:
+            <span>o prazer do inesperado.</span>
+          </h1>
+
+          <p>
+            Uma campanha de comunicação criada para transformar a hesitação
+            perante o desconhecido em curiosidade, respeito e vontade de
+            descoberta.
+          </p>
+
+        </div>
+
+        <!-- GRELHA DE IMAGENS -->
+
+        <div class="portfolio-grid">
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image poster-image">
+              <img
+                src="retire-o-quadrado-branco-dessa-imagem.jpg"
+                alt="Cartaz principal da campanha BLEND TRAVEL"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Cartaz principal</h3>
+
+              <p>
+                A peça central da campanha apresenta Marraquexe como um destino
+                de descoberta, curiosidade e novas experiências.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="148.jpg"
+                alt="Montanhas do Atlas em Marrocos"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Montanhas do Atlas</h3>
+
+              <p>
+                Paisagens completamente diferentes da cidade, que mostram a
+                diversidade natural de Marrocos.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="86039934.webp"
+                alt="Interior de um Riad tradicional em Marraquexe"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Riads tradicionais</h3>
+
+              <p>
+                Casas tradicionais com pátios interiores, azulejos, fontes e
+                espaços tranquilos escondidos no interior da Medina.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="388993731.jpg"
+                alt="Pátio interior de um Riad marroquino"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Arquitetura e detalhes</h3>
+
+              <p>
+                A arquitetura marroquina revela padrões geométricos, portas
+                trabalhadas, mosaicos e uma forte atenção aos detalhes.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="chicken-pastilla-ma.webp"
+                alt="Pastilla marroquina"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Pastilla</h3>
+
+              <p>
+                Uma especialidade de massa folhada que combina sabores doces e
+                salgados numa receita tradicional.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="il_1588xN.7552728156_j6ew.webp"
+                alt="Cuscuz marroquino"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Cuscuz marroquino</h3>
+
+              <p>
+                Um prato tradicional servido com legumes, carne, grão-de-bico e
+                diferentes temperos.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="Jardin_des_majorel.JPG"
+                alt="Jardim Majorelle em Marraquexe"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Jardim Majorelle</h3>
+
+              <p>
+                Um espaço conhecido pelo contraste entre a vegetação, a
+                arquitetura e o característico azul dos edifícios.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="large_1.jpg"
+                alt="Tagine marroquino"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Tagine</h3>
+
+              <p>
+                Um dos pratos mais conhecidos de Marrocos, preparado com carne,
+                legumes, azeitonas e especiarias.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="morocco_marrakech_djema_el_fna_AdobeStock_231141068-scaled.webp"
+                alt="Mercado tradicional de Marraquexe"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Os souks</h3>
+
+              <p>
+                Mercados tradicionais cheios de cores, aromas, tecidos,
+                artesanato e especiarias.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="mint-tea.webp"
+                alt="Chá de menta marroquino"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Chá de menta</h3>
+
+              <p>
+                Uma das bebidas mais tradicionais de Marrocos e uma experiência
+                de hospitalidade e partilha.
+              </p>
+            </div>
+
+          </article>
+
+        </div>
+        <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="thumb_205945_default_big.jpg"
+                alt="Praça jemaa el-fna"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Praça jemaa el-fna</h3>
+
+              <p>
+                É o lugar mais emblematico de Marraquexe sobretudo ao final do dia ganha muita vida com comida, música, comércio e diferentes manifestações culturais.
+              </p>
+            </div>
+            
+
+          </article>
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-image">
+              <img
+                src="caption.jpg"
+                alt="bahia"
+              >
+            </div>
+
+            <div class="portfolio-content">
+              <h3>Palacio da bahia</h3>
+
+              <p>
+                O Palácio da Bahia, localizado na Medina de Marraquexe, é um deslumbrante complexo do final do século XIX famoso pelo seu imponente Grande Pátio em mármore, tetos esculpidos em madeira de cedro e pátios labirínticos.
+              </p>
+            </div>
+            
+
+          </article>
+
+        <!-- TEXTO SOBRE MARRAQUEXE -->
+
+        <section class="travel-info">
+
+          <div class="travel-intro reveal">
+
+            <h2>
+              Conhecer Marraquexe é aceitar o convite para descobrir.
+            </h2>
+
+            <p>
+              Marraquexe, conhecida como a
+              <strong>“Cidade Vermelha”</strong>, é uma das cidades imperiais
+              mais fascinantes de Marrocos. Localizada no norte de África, no
+              sopé das impressionantes Montanhas do Atlas, a cidade representa
+              um choque cultural a poucas horas de voo de Portugal.
+            </p>
+
+          </div>
+
+          <div class="info-section reveal">
+
+            <h2>Vantagens</h2>
+
+            <div class="advantages-grid">
+
+              <article class="info-card">
+                <h3>Cultura diferente</h3>
+
+                <p>
+                  Uma realidade cultural diferente da europeia, proporcionando
+                  uma experiência completamente nova.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Gastronomia rica</h3>
+
+                <p>
+                  Uma cozinha cheia de sabores e especiarias, ideal para quem
+                  gosta de experimentar comida diferente.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Lugares fotogénicos</h3>
+
+                <p>
+                  O Jardim Majorelle, os souks e os palácios oferecem cenários
+                  marcantes e diversificados.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Clima solarengo</h3>
+
+                <p>
+                  Marraquexe tem sol durante grande parte do ano e invernos
+                  muito amenos durante o dia.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Acomodação única</h3>
+
+                <p>
+                  É possível ficar num Riad, uma casa tradicional com pátio
+                  interior, muitas vezes escondida atrás de fachadas discretas.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Vários orçamentos</h3>
+
+                <p>
+                  Existem opções desde hostels e comida de rua acessível até
+                  resorts de luxo.
+                </p>
+              </article>
+
+            </div>
+
+          </div>
+
+          <div class="info-section reveal">
+
+            <h2>Desvantagens</h2>
+
+            <div class="disadvantages-grid">
+
+              <article class="info-card">
+                <h3>Intensidade e trânsito</h3>
+
+                <p>
+                  O trânsito de motas na Medina e as multidões podem ser
+                  intensos e stressantes.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Calor no verão</h3>
+
+                <p>
+                  Durante os meses de julho e agosto, as temperaturas podem
+                  ultrapassar facilmente os 40 °C.
+                </p>
+              </article>
+
+              <article class="info-card">
+                <h3>Abordagem nos souks</h3>
+
+                <p>
+                  A insistência de alguns vendedores nos mercados tradicionais
+                  pode exigir atenção e paciência.
+                </p>
+              </article>
+
+            </div>
+
+          </div>
+
+          <div class="info-section reveal">
+
+           
+            </div>
+
+          </div>
+
+          <div class="info-section reveal">
+
+            <h2>    A gastronomia marroquina</h2>
+
+            <p>
+                  A gastronomia marroquina é rica em sabores e especiarias, embora
+              nem sempre seja picante. A comida constitui também uma experiência
+              cultural e uma forma de conhecer melhor o destino.
+            </p>
+
+            <div class="food-grid">
+
+              <article class="info-card food-card">
+                <h3>Tagine</h3>
+
+                <p>
+                  Um dos pratos mais conhecidos da gastronomia marroquina,
+                  preparado em diferentes versões com carne, legumes e especiarias.
+                </p>
+              </article>
+
+              <article class="info-card food-card">
+                <h3>Cuscuz marroquino</h3>
+
+                <p>
+                  Normalmente servido com legumes, carne e diferentes temperos.
+                </p>
+              </article>
+
+              <article class="info-card food-card">
+                <h3>Pastilla</h3>
+
+                <p>
+                  Uma tarte folhada que combina sabores doces e salgados.
+                </p>
+              </article>
+
+              <article class="info-card food-card">
+                <h3>Saladas marroquinas</h3>
+
+                <p>
+                  Podem incluir tomate, cenoura, beringela, pimentos e
+                  diferentes temperos.
+                </p>
+              </article>
+
+              <article class="info-card food-card">
+                <h3>Chá de menta</h3>
+
+                <p>
+                  Uma das bebidas mais tradicionais e uma experiência cultural
+                  por si só.
+                </p>
+              </article>
+
+            </div>
+
+          </div>
+
+          <div class="conclusion reveal">
+
+            <h2>
+              Marraquexe é uma cidade para descobrir com todos os sentidos.
+            </h2>
+
+            <p>
+              Em conclusão, Marraquexe oferece uma experiência única, combinando
+              cultura, história, gastronomia e paisagens diferentes. A sua comida
+              tradicional, os mercados, os monumentos históricos e os jardins
+              tornam a cidade especialmente interessante para visitar.
+            </p>
+
+          </div>
+
+        </section>
+
+        <!-- BRIEFING -->
+
+        <section class="briefing reveal">
+
+          <h2>Enquadramento da campanha</h2>
+
+          <div class="briefing-grid">
+
+            <div class="briefing-item">
+              <strong>Público-alvo</strong>
+
+              <p>
+                Jovens adultos entre os 18 e os 30 anos interessados em viagens,
+                experiências diferentes e descoberta cultural.
+              </p>
+            </div>
+
+            <div class="briefing-item">
+              <strong>Desafio</strong>
+
+              <p>
+                A diferença cultural pode despertar curiosidade, mas também
+                alguma hesitação perante o desconhecido.
+              </p>
+            </div>
+
+            <div class="briefing-item">
+              <strong>Objetivo comunicativo</strong>
+
+              <p>
+                Incentivar a descoberta sensorial e o contacto respeitoso com
+                ambientes, experiências e formas de viver diferentes.
+              </p>
+            </div>
+
+            <div class="briefing-item">
+              <strong>Efeito pretendido</strong>
+
+              <p>
+                Transformar a hesitação em curiosidade, evitando estereótipos,
+                exotização e simplificações culturais.
+              </p>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+
+      <strong>BLEND TRAVEL</strong>
+
+      <p>
+        Marraquexe · O prazer do inesperado.
+      </p>
+
+    </div>
+  </footer>
+
+  <script>
+    const elementosReveal = document.querySelectorAll(".reveal");
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    elementosReveal.forEach((elemento) => {
+      observador.observe(elemento);
+    });
+
+    function mostrarPagina(paginaId) {
+      const paginas = document.querySelectorAll(".page");
+      const botoes = document.querySelectorAll(".nav-button");
+
+      paginas.forEach((pagina) => {
+        pagina.classList.remove("active");
+      });
+
+      botoes.forEach((botao) => {
+        botao.classList.remove("active");
+      });
+
+      const paginaSelecionada = document.getElementById(paginaId);
+      const botaoSelecionado = document.querySelector(
+        `.nav-button[data-page="${paginaId}"]`
+      );
+
+      if (paginaSelecionada) {
+        paginaSelecionada.classList.add("active");
+      }
+
+      if (botaoSelecionado) {
+        botaoSelecionado.classList.add("active");
+      }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+      setTimeout(() => {
+        const elementosDaPagina =
+          paginaSelecionada.querySelectorAll(".reveal");
+
+        elementosDaPagina.forEach((elemento) => {
+          elemento.classList.remove("visible");
+          observador.observe(elemento);
+        });
+      }, 100);
+    }
+  </script>
+
+</body>
+</html>
