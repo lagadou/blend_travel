@@ -999,6 +999,45 @@
       color: rgba(244, 241, 232, 0.75);
       font-size: 0.9rem;
     }
+    .travel-intro {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 75px;
+  align-items: start;
+  margin-bottom: 65px;
+}
+
+.travel-title {
+  position: sticky;
+  top: 115px;
+}
+
+.travel-title h2 {
+  max-width: 520px;
+  color: var(--azul);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 0.95;
+}
+
+.travel-description {
+  max-width: 720px;
+}
+
+.travel-description p {
+  margin-bottom: 21px;
+  color: var(--castanho);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.travel-description p:first-child {
+  font-size: 1.16rem;
+}
+
+.travel-description strong {
+  color: var(--terracota);
+}
 
     /* Responsividade */
 
@@ -1013,7 +1052,15 @@
         grid-template-columns: 1fr;
         gap: 45px;
       }
+      .travel-intro {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
 
+      .travel-title {
+        position: relative;
+        top: auto;
+      }
       .products-image {
         position: relative;
         top: auto;
@@ -1562,47 +1609,57 @@
         </div>
   <div class="travel-intro reveal">
 
-            <h2>
-              Conhecer Marraquexe é aceitar o convite para descobrir.
-            </h2>
+  <div class="travel-title">
+    <p class="eyebrow">O destino</p>
 
-            <p>
-  Marraquexe, conhecida como a “Cidade Vermelha” devido à cor ocre das suas
-  muralhas e edifícios, é uma das cidades imperiais mais fascinantes de
-  Marrocos. Localizada no norte de África, junto ao sopé das impressionantes
-  Montanhas do Atlas, a cidade combina história, cultura, arquitetura,
-  gastronomia e paisagens muito distintas das que encontramos habitualmente
-  na Europa.
-</p>
+    <h2>
+      Conhecer Marraquexe é aceitar o convite para descobrir.
+    </h2>
+  </div>
 
-<p>
-  A pouca distância de voo de Portugal, Marraquexe apresenta-se como um
-  destino acessível, mas culturalmente muito diferente. A sua Medina, os
-  mercados tradicionais, os riads, os jardins e as praças revelam uma cidade
-  cheia de movimento, contrastes, aromas, sons e texturas.
-</p>
+  <div class="travel-description">
 
-<p>
-  Visitar Marraquexe é entrar em contacto com outras formas de viver, criar,
-  cozinhar e ocupar o espaço público. Cada rua pode revelar uma nova
-  descoberta: uma porta trabalhada, uma oficina de artesanato, uma banca de
-  especiarias, um pátio escondido ou uma conversa num café local.
-</p>
+    <p>
+      Marraquexe, conhecida como a
+      <strong>“Cidade Vermelha”</strong> devido à cor ocre das suas muralhas
+      e edifícios, é uma das cidades imperiais mais fascinantes de Marrocos.
+      Localizada no norte de África, junto ao sopé das impressionantes
+      Montanhas do Atlas, a cidade combina história, cultura, arquitetura,
+      gastronomia e paisagens muito distintas das que encontramos habitualmente
+      na Europa.
+    </p>
 
-<p>
-  Apesar de poder causar alguma estranheza inicial, esta diferença cultural
-  constitui precisamente uma das maiores riquezas do destino. Marraquexe
-  convida o visitante a sair do conhecido, a observar com atenção e a
-  aproximar-se de uma realidade diferente com curiosidade e respeito.
-</p>
+    <p>
+      A pouca distância de voo de Portugal, Marraquexe apresenta-se como um
+      destino acessível, mas culturalmente muito diferente. A sua Medina, os
+      mercados tradicionais, os riads, os jardins e as praças revelam uma
+      cidade cheia de movimento, contrastes, aromas, sons e texturas.
+    </p>
 
-<p>
-  É esta relação entre o familiar e o inesperado que está na base da campanha
-  BLEND TRAVEL: apresentar Marraquexe não como um lugar exótico ou distante,
-  mas como uma cidade viva, complexa e repleta de experiências capazes de
-  transformar a forma como vemos o mundo.
-</p>
-          </div>
+    <p>
+      Visitar Marraquexe é entrar em contacto com outras formas de viver,
+      criar, cozinhar e ocupar o espaço público. Cada rua pode revelar uma nova
+      descoberta: uma porta trabalhada, uma oficina de artesanato, uma banca de
+      especiarias, um pátio escondido ou uma conversa num café local.
+    </p>
+
+    <p>
+      Apesar de poder causar alguma estranheza inicial, esta diferença cultural
+      constitui precisamente uma das maiores riquezas do destino. Marraquexe
+      convida o visitante a sair do conhecido, a observar com atenção e a
+      aproximar-se de uma realidade diferente com curiosidade e respeito.
+    </p>
+
+    <p>
+      É esta relação entre o familiar e o inesperado que está na base da
+      campanha BLEND TRAVEL: apresentar Marraquexe não como um lugar exótico
+      ou distante, mas como uma cidade viva, complexa e repleta de experiências
+      capazes de transformar a forma como vemos o mundo.
+    </p>
+
+  </div>
+
+</div>
         <!-- GRELHA DE IMAGENS -->
 
         <div class="portfolio-grid">
