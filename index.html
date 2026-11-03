@@ -569,7 +569,129 @@
       color: rgba(244, 241, 232, 0.85);
       font-size: 0.96rem;
     }
+/* Área de produtos */
 
+.products-section {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(231, 221, 204, 0.7),
+      rgba(244, 241, 232, 0.96)
+    );
+}
+
+.products-heading {
+  max-width: 780px;
+  margin-bottom: 52px;
+}
+
+.products-heading h2 {
+  max-width: 720px;
+  margin-bottom: 18px;
+  color: var(--azul);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 0.95;
+}
+
+.products-heading > p:last-child {
+  max-width: 670px;
+  color: var(--castanho);
+  font-size: 1.08rem;
+}
+
+.products-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: start;
+  gap: 65px;
+}
+
+.products-image {
+  position: sticky;
+  top: 110px;
+  overflow: hidden;
+  border-radius: var(--raio);
+  background: var(--creme-escuro);
+  box-shadow: var(--sombra-forte);
+  transform: rotate(-2deg);
+  transition: var(--transicao);
+}
+
+.products-image:hover {
+  transform: rotate(0deg) translateY(-8px);
+}
+
+.products-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.products-image:hover img {
+  transform: scale(1.04);
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 24px 0;
+  border-top: 1px solid rgba(22, 76, 81, 0.22);
+  transition: var(--transicao);
+}
+
+.product-item:last-child {
+  border-bottom: 1px solid rgba(22, 76, 81, 0.22);
+}
+
+.product-item:hover {
+  padding-left: 14px;
+  border-color: var(--terracota);
+  transform: translateX(5px);
+}
+
+.product-number {
+  display: flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--terracota);
+  color: var(--creme);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: var(--transicao);
+}
+
+.product-item:hover .product-number {
+  background: var(--azul);
+  transform: rotate(12deg) scale(1.1);
+}
+
+.product-item h3 {
+  margin-bottom: 6px;
+  color: var(--azul);
+  font-family: "Playfair Display", serif;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.product-item p {
+  max-width: 580px;
+  color: var(--castanho);
+  font-size: 0.96rem;
+}
     /* Portfólio */
 
     .portfolio-intro {
@@ -887,7 +1009,17 @@
       .travel-intro {
         grid-template-columns: 1fr;
       }
+      .products-layout {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
 
+      .products-image {
+        position: relative;
+        top: auto;
+        max-width: 650px;
+        margin: 0 auto;
+      }
       .promotion-copy {
         text-align: center;
       }
@@ -922,7 +1054,29 @@
       .nav-container {
         min-height: 70px;
       }
+      .products-heading h2 {
+        font-size: clamp(2.6rem, 12vw, 4.5rem);
+      }
 
+      .product-item {
+        grid-template-columns: 40px 1fr;
+        gap: 14px;
+        padding: 21px 0;
+      }
+
+      .product-number {
+        width: 34px;
+        height: 34px;
+        font-size: 0.7rem;
+      }
+
+      .product-item h3 {
+        font-size: 1.35rem;
+      }
+
+      .product-item p {
+        font-size: 0.9rem;
+      }
       .logo {
         font-size: 0.82rem;
       }
@@ -1151,7 +1305,133 @@
         </div>
 
       </section>
+      <!-- ÁREA DE PRODUTOS BLEND TRAVEL -->
 
+      <section class="section products-section">
+
+        <div class="container">
+
+          <div class="products-heading reveal">
+            <p class="eyebrow">Preparar a viagem</p>
+
+            <h2>
+              Tudo o que precisas para acompanhar a tua visita.
+            </h2>
+
+            <p>
+              Aqui estão alguns dos nossos produtos que podes adquirir para
+              acompanhar a tua visita a Marraquexe.
+            </p>
+          </div>
+
+          <div class="products-layout">
+
+            <div class="products-image reveal">
+              <img
+                src="produtos-blend-travel.jpg"
+                alt="Produtos Blend Travel para acompanhar uma visita a Marraquexe"
+              >
+            </div>
+
+            <div class="products-list reveal">
+
+              <article class="product-item">
+                <span class="product-number">01</span>
+
+                <div>
+                  <h3>Prancha de surf</h3>
+
+                  <p>
+                    A poucos quilómetros de Marraquexe, mais perto da costa,
+                    podes surfar no mar de Marrocos.
+                  </p>
+                </div>
+              </article>
+
+              <article class="product-item">
+                <span class="product-number">02</span>
+
+                <div>
+                  <h3>Água</h3>
+
+                  <p>
+                    Leva contigo muita água para te manteres hidratado, pois
+                    podes enfrentar temperaturas elevadas.
+                  </p>
+                </div>
+              </article>
+
+              <article class="product-item">
+                <span class="product-number">03</span>
+
+                <div>
+                  <h3>Chá de menta</h3>
+
+                  <p>
+                    Experimenta este sabor tradicional do chá de Marraquexe.
+                  </p>
+                </div>
+              </article>
+
+              <article class="product-item">
+                <span class="product-number">04</span>
+
+                <div>
+                  <h3>Café</h3>
+
+                  <p>
+                    Importante para manteres a energia enquanto visitas todos
+                    os cantos de Marraquexe.
+                  </p>
+                </div>
+              </article>
+
+              <article class="product-item">
+                <span class="product-number">05</span>
+
+                <div>
+                  <h3>Óleo de argão</h3>
+
+                  <p>
+                    Um produto muito utilizado em Marrocos, associado à
+                    gastronomia e às tradições locais.
+                  </p>
+                </div>
+              </article>
+
+              <article class="product-item">
+                <span class="product-number">06</span>
+
+                <div>
+                  <h3>Vinho e whisky</h3>
+
+                  <p>
+                    Descobre novos sabores durante a viagem, sempre com
+                    moderação e responsabilidade.
+                  </p>
+                </div>
+              </article>
+
+              <article class="product-item">
+                <span class="product-number">07</span>
+
+                <div>
+                  <h3>Cerveja</h3>
+
+                  <p>
+                    Uma opção para levar contigo e aproveitar diferentes
+                    momentos da viagem, sempre com moderação.
+                  </p>
+                </div>
+              </article>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
       <section class="section">
 
         <div class="container">
